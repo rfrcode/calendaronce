@@ -9,7 +9,7 @@ Remember to:
 
 Components:
 
-        Calendar
+    Calendar
         Header
             CurrentTimer
             CurrentDate
