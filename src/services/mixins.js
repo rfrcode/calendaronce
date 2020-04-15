@@ -1,25 +1,34 @@
-export const MixinPubSub = Base => class extends Base{
-   #pubsub;
-   #mixinvar;
-    connectedCallback(){ 
-        if(!this.#pubsub){
-            let event = new CustomEvent('getpub',{
-                bubbles:true,
-                composed:true
+export const MixinPubSub = Base => class extends Base {
+    #pubsub;
+    #mixinvar;
+    connectedCallback() {
+        if (!this.#pubsub) {
+            let event = new CustomEvent('getpub', {
+                bubbles: true,
+                composed: true
             })
             this.dispatchEvent(event);
         }
-    } 
-    set pubSub(value){  
-        if(value){
+    }
+    set pubSub(value) {
+        if (value) {
             this.#pubsub = value;
         }
     }
-    get pubSub(){
+    get pubSub() {
         return this.#pubsub;
-    }    
+    }
 }
 
+export const Disposables = Base => class extends Base {
+    #diposables = [];
+    get disposables(){
+        return this.#diposables;
+    }
+    dispose(){
+        this.#diposables.forEach(d=>d());
+    }
+}
 
 
 
