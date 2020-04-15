@@ -15,7 +15,7 @@ class CalendarHeader extends LitElement {
     render() {
        return html`
             <bcn-timer></bcn-timer>
-            <bcn-currentdate><bcn-currentdate>
+            <bcn-currentdate></bcn-currentdate>
         `
     }
 }
