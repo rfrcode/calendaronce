@@ -31,7 +31,7 @@ class DayOfWeek extends LitElement{
 
     shouldUpdate(changedProperties) {
         changedProperties.forEach((oldValue, DayOfWeek) => {
-          console.log(`${DayOfWeek} changed. oldValue: ${oldValue}`);
+          console.log(`${DayOfWeek} changed. oldValue: ${oldValue}`);   //el console log sobra pero no se como hacerlo sino
         });
         return changedProperties.has('DayofWeek');
     }
