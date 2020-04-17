@@ -5,7 +5,7 @@ import { } from './body.js'
 import { PubSub } from '../services/pubsub.js';
 
 class Calendar extends LitElement {
-    #pubsub = new PubSub();
+    _pubsub = new PubSub();
     static get styles() {
         return [
             flexcolumn,
@@ -25,14 +25,13 @@ class Calendar extends LitElement {
         this.addEventListener('getpub',(ev)=>{
             ev.stopPropagation();
             //TODO composedPath() ?
-            ev.path[0].pubSub = this.#pubsub;
+            ev.path[0].pubSub = this._pubsub;
         });
     }
     render() {
         return html`
             <bcn-calendar-header></bcn-calendar-header>
             <bcn-calendar-body></bcn-calendar-body>
-
         `
     }
 }

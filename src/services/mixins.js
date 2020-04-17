@@ -1,7 +1,10 @@
 export const MixinPubSub = Base => class extends Base {
-    #pubsub;
+    constructor(){
+        super();
+        this._pubsub = null;
+    }
     getPub() {
-        if (!this.#pubsub) {
+        if (!this._pubsub) {
             let event = new CustomEvent('getpub', {
                 bubbles: true,
                 composed: true
@@ -11,20 +14,23 @@ export const MixinPubSub = Base => class extends Base {
     }
     set pubSub(value) {
         if (value) {
-            this.#pubsub = value;
+            this._pubsub = value;
         }
     }
     get pubSub() {
-        return this.#pubsub;
+        return this._pubsub;
     }
 }
 
 export const Disposables = Base => class extends Base {
-    #diposables = [];
+    constructor(){
+        super();
+        this._disposables = [];
+    }
     get disposables(){
-        return this.#diposables;
+        return this._disposables;
     }
     dispose(){
-        this.#diposables.forEach(d=>d());
+        this._disposables.forEach(d=>d());
     }
 }

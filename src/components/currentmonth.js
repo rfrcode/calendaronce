@@ -5,11 +5,6 @@ import { DateService } from '../services/dateservice.js'
 import { MixinPubSub, Disposables } from '../services/mixins.js'
 
 class CurrentMonth extends MixinPubSub(Disposables(CurrentTextElement)) {
-    static get properties() {
-        return {
-            date: { type: Object }
-        };
-    }
     constructor() {
         super(CHANELS.CHANGEMONTH, FormatDate.getCurrentMonth);
         this.date = DateService.getCurrentDate();
