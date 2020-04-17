@@ -3,6 +3,7 @@ import { html, css, LitElement } from 'lit-element';
 import { flexcolumn } from '../css/flexcolumn.js'
 import { padding } from '../css/padding.js'
 import { } from './currentmonth.js'
+import {}  from './daysofweek.js'
 class CalendarBody extends LitElement {
     static get styles() {
         return [
@@ -16,7 +17,7 @@ class CalendarBody extends LitElement {
                     display:grid;
                     grid-template-columns: repeat(7,2.5rem);
                     grid-template-rows:2.5rem;
-                    gap:2px;
+                    gap:0.375rem;
                     align-items: center;
                 }
                 bcn-currentmonth{
@@ -32,7 +33,8 @@ class CalendarBody extends LitElement {
                 <bcn-currentmonth></bcn-currentmonth>
                 <bcn-calendarbutton .action="${PREVIOUS}"></bcn-calendarbutton>
                 <bcn-calendarbutton .action="${NEXT}"></bcn-calendarbutton>
-            <div>
+            </div>
+            <bcn-daysofweek></bcn-daysofweek>
         `;
     }
 }

@@ -17,7 +17,7 @@ class Calendar extends LitElement {
                     background-color: var(--calendar-background);
                     cursor: default;
                     user-select: none;
-                    width:20rem;
+                    width:20.625rem;
                 }
             `
         ];
