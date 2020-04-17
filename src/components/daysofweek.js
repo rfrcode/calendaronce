@@ -1,7 +1,7 @@
 import {CONFIG} from '../services/config.js';
 import {CULTURE} from '../services/culture.js';
 import { LitElement, html, css } from 'lit-element'
-class DayOfWeek extends LitElement{
+class DaysOfWeek extends LitElement{
 
     static get styles() {
         return css`
@@ -27,4 +27,4 @@ class DayOfWeek extends LitElement{
 
 }
 
-customElements.define('bcn-dayofweek',DayOfWeek);
+customElements.define('bcn-daysofweek',DaysOfWeek);

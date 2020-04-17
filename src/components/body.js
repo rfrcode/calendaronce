@@ -1,6 +1,10 @@
 import { LitElement, html, css } from 'lit-element'
 import { flexcolumn } from '../css/flexcolumn.js'
 import { padding } from '../css/padding.js';
+import { } from './currentmonth.js';
+import { } from './button.js';
+import { } from './daysofweek.js';
+
 class CalendarBody extends LitElement {
     static get styles() {
         const style = css`
@@ -16,6 +20,7 @@ class CalendarBody extends LitElement {
                        <bcn-calendarbutton previous></bcn-calendarbutton>
                        <bcn-calendarbutton next></bcn-calendarbutton>
                    </div>
+                   <bcn-daysofweek></bcn-daysofweek>
         `
     }
 }
