@@ -1,9 +1,11 @@
 import { LitElement, html, css } from 'lit-element'
 import { flexcolumn } from '../css/flexcolumn.js'
 import { } from './header.js'
-class Calendar extends LitElement {
-    static get styles() {
+import { PubSub } from '../services/pubsub.js';
 
+class Calendar extends LitElement {
+    #pubsub = new PubSub();
+    static get styles() {
         return [
             flexcolumn,
             css`
@@ -16,6 +18,14 @@ class Calendar extends LitElement {
                 }
             `
         ];
+    }
+    constructor() {
+        super();
+        this.addEventListener('getpub',(ev)=>{
+            ev.stopPropagation();
+            //TODO composedPath() ?
+            ev.path[0].pubSub = this.#pubsub;
+        });
     }
     render() {
         return html`
