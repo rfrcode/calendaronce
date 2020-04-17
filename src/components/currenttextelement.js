@@ -10,12 +10,8 @@ export class CurrentTextElement extends Disposables(LitElement) {
         super();
         this._format = format;
         this.date = DateService.getCurrentDate();
-        if(cb){
-            pubsub.sub(chanel,  cb, null, this.disposables)
-        }else{
-            pubsub.sub(chanel, (date) => this.date = date, null, this.disposables)
-        }
-        
+        const cbDate = (date) => this.date = date;
+        pubsub.sub(chanel, cb || cbDate, null, this.disposables)
     }
     format() {
         return this._format(this.date);
