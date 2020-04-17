@@ -9,7 +9,6 @@ class Calendar extends LitElement {
         this._pubsub = new PubSub();
     }
     static get styles() {
-
         return [
             flexcolumn,
             css`
