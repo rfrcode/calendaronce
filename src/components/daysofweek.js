@@ -6,10 +6,10 @@ class DayOfWeek extends LitElement{
     static get styles() {
         return css`
         :host{
-            display:grid; 
-            grid-template-columns: repeat(7,40px);
-            gap:2px;
-            height:40px;
+            display:grid;
+            grid-template-columns: repeat(7,2.5rem);
+            gap: 0.375rem;
+            height:2.5rem;
         }
         div{
             display: flex;
