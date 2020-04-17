@@ -1,6 +1,6 @@
 import {CONFIG} from '../services/config.js';
 import {CULTURE} from '../services/culture.js';
-import { LitElement, html, css } from 'lit-element'
+import { LitElement, html, css } from '../../node_modules/lit-element/lit-element.js'
 class DaysOfWeek extends LitElement{
 
     static get styles() {

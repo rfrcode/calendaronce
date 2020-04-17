@@ -1,12 +1,8 @@
-import { LitElement, html, css } from 'lit-element'
 import { CHANELS } from '../services/chanels.js';
 import { FormatDate } from '../services/formatdate.js';
 import { CurrentTextElement } from './currenttextelement.js'
 import { DateService } from '../services/dateservice.js'
 import { MixinPubSub, Disposables } from '../services/mixins.js'
-import pubsub from './pubsub.js'
-
-
 
 class CurrentMonth extends MixinPubSub(Disposables(CurrentTextElement)) {
     static get properties() {

@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit-element'
+import { LitElement, html, css } from '../../node_modules/lit-element/lit-element.js'
 import { flexcolumn } from '../css/flexcolumn.js'
 import { padding } from '../css/padding.js';
 import { } from './currentmonth.js';
