@@ -1,6 +1,7 @@
 import { LitElement, html, css } from '../../node_modules/lit-element/lit-element.js'
 import { flexcolumn } from '../css/flexcolumn.js'
 import { } from './header.js'
+import { } from './body.js'
 import { PubSub } from '../services/pubsub.js';
 
 class Calendar extends LitElement {
@@ -30,6 +31,8 @@ class Calendar extends LitElement {
     render() {
         return html`
             <bcn-calendar-header></bcn-calendar-header>
+            <bcn-calendar-body></bcn-calendar-body>
+
         `
     }
 }
