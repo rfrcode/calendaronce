@@ -27,7 +27,7 @@ export const button = css`
     }
 
     .previous{
-        margin-top: 0.625rem;
+        margin-top: 0.875rem;
         transform: rotate(-135deg);
     }
     .next{

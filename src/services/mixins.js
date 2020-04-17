@@ -3,11 +3,12 @@ export const MixinPubSub = Base => class extends Base {
         super(...arguments);
         this._pubsub = null;
     }
-    getPub() {
+    getPub(instance) {
         if (!this._pubsub) {
             let event = new CustomEvent('getpub', {
                 bubbles: true,
-                composed: true
+                composed: true,
+                detail:{instance:instance}
             })
             this.dispatchEvent(event);
         }

@@ -25,9 +25,11 @@ class Calendar extends LitElement {
     connectedCallback() {
         super.connectedCallback();
         this.addEventListener('getpub', (ev) => {
-            ev.stopPropagation();            
-            ev.path[0].pubSub = this._pubsub;
-        })
+            ev.stopPropagation();      
+            const {instance} = ev.detail || {};
+            instance && (instance.pubSub = this._pubsub)      
+            
+        },false)
     }
     render() {
         return html`

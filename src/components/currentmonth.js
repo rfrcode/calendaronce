@@ -8,13 +8,12 @@ import pubsub from '../services/pubsub.js'
 
 class CurrentMonth extends MixinPubSub(CurrentTextElement) {
 
-   
     constructor() {
         super(CHANELS.CHANGEMONTH,FormatDate.getCurrentMonth,(date) => this.changeAutomaticMonth(date));
     }
     connectedCallback() {
         super.connectedCallback();
-        this.getPub();
+        this.getPub(this);
     }
     set pubSub(value) {
         super.pubSub=value;

@@ -28,7 +28,7 @@ class CalendarButton extends MixinPubSub(LitElement) {
     }
     connectedCallback() {
         super.connectedCallback();
-        this.getPub();
+        this.getPub(this);
     }
     handleClick(ev) {
         ev.stopPropagation();
