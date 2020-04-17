@@ -3,26 +3,29 @@ import pubsub from '../services/pubsub.js'
 import { DateService } from '../services/dateservice.js'
 import { LitElement, html } from '../../node_modules/lit-element/lit-element.js'
 export class CurrentTextElement extends Disposables(LitElement) {
-    #date = DateService.getCurrentDate();
-    #format;
-    constructor(chanel, format) {
+    static get properties() {
+        return { date: Object };
+    }
+    constructor(chanel, format, cb = null) {
         super();
-        this.#format = format;
-        pubsub.sub(chanel, (date) => this.date = date, null, this.disposables)
-    }
-    set date(value) {
-        const olddate = this.#date;
-        this.#date = value;
-        this.requestUpdate('date',olddate);
-    }
-    get date() {
-        return this.#date
+        this._format = format;
+        this.date = DateService.getCurrentDate();
+        if(cb){
+            pubsub.sub(chanel,  cb, null, this.disposables)
+        }else{
+            pubsub.sub(chanel, (date) => this.date = date, null, this.disposables)
+        }
+        
     }
     format() {
-        return this.#format(this.date);
+        return this._format(this.date);
     }
     render() {
         return html`${this.format()}`;
+    }
+    disconnectedCallback() {
+        super.disconnectedCallback();
+        this.dispose();
     }
 }
 

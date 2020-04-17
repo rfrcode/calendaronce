@@ -13,5 +13,6 @@ class CurrentTimer extends CurrentTextElement {
             }
         `;
     }
+    
 }
 customElements.define('bcn-timer',CurrentTimer);

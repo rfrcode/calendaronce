@@ -1,7 +1,8 @@
 import {css} from 'lit-element';
+
 export const button = css`
     button {
-        background-color: black;
+        background-color: var(--calendar-background);
         border:none;
         width: 100%;
         height: 100%;
@@ -15,18 +16,18 @@ export const button = css`
 
     i{
 
-        border: solid gray;
-        border-width: 0 3px 3px 0;
+        border: solid var(--calendar-greyed-color);
+        border-width: 0 0.1875rem 0.1875rem 0;
         display: inline-block;
-        padding: 5px;
+        padding: 0.3125rem;
     }
     button:hover>i{
-        border: solid white;
-        border-width: 0 3px 3px 0;
+        border: solid var(--calendar-color);
+        border-width: 0 0.1875rem 0.1875rem 0;
     }
 
     .previous{
-        margin-top: 10px;
+        margin-top: 0.625rem;
         transform: rotate(-135deg);
     }
     .next{
