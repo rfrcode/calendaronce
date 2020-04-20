@@ -43,9 +43,9 @@ class Events extends MixinPubSub(LitElement) {
     render() {
         return html`
             <div>${FormatDate.getDay(this.objectDay.date)}</div>
-            ${!this.dayEvents ?
+            ${this.dayEvents === undefined?
                 html`<div>${CULTURE[CONFIG.culture].noEvents}</div>` :
-                html`${this.dayEvents.events.map(dayEvent => html`<event-item .item=${dayEvent}></event-item>`)}`
+                html`${this.dayEvents && this.dayEvents.events.map(dayEvent => html`<event-item .item=${dayEvent}></event-item>`)}`
             }
         `;
     }
