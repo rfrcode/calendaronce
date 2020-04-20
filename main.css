@@ -3,7 +3,8 @@
     --calendar-color: white;
     --calendar-background:  black;
     --calendar-secondary-color: blue;
-    --calendar-greyed-color: grey;         
+    --calendar-greyed-color: grey;
+    --calendar-font-family: Segoe UI, sans-serif;
 }
 
 

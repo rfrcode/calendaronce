@@ -10,6 +10,7 @@ class CurrentTimer extends CurrentTextElement {
         return css`
             :host{
                 font-size:3rem;
+                font-weight: lighter;
             }
         `;
     }

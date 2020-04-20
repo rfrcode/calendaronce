@@ -1,7 +1,8 @@
-import { LitElement, html } from '../../../node_modules/lit-element/lit-element.js';
-import { DateService } from '../../services/dateservice.js'
-import { CULTURE } from '../culture.js'
-import { CONFIG } from '../config.js'
+import { LitElement, html, css } from '../../node_modules/lit-element/lit-element.js';
+import { DateService } from '../services/dateservice.js'
+import { FormatDate } from '../services/formatdate.js'
+import { CULTURE } from '../services/culture.js'
+import { CONFIG } from '../services/config.js'
 class EventItem extends LitElement {
     static getproperties(){
         item: { type: Object }

@@ -2,6 +2,7 @@ import { LitElement, html, css } from '../../node_modules/lit-element/lit-elemen
 import { flexcolumn } from '../css/flexcolumn.js'
 import { } from './header.js'
 import { } from './body.js'
+import { } from './events.js'
 import { PubSub } from '../services/pubsub.js'
 class Calendar extends LitElement {
     constructor() {
@@ -18,6 +19,7 @@ class Calendar extends LitElement {
                     cursor: default;
                     user-select: none;
                     width:20.625rem;
+                    font-family: var(--calendar-font-family);
                 }
             `
         ];
@@ -35,6 +37,7 @@ class Calendar extends LitElement {
         return html`
             <bcn-calendar-header></bcn-calendar-header>
             <bcn-calendar-body></bcn-calendar-body>
+            <bcn-events></bcn-events>
         `
     }
 }

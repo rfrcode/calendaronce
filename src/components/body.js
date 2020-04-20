@@ -1,9 +1,11 @@
-import {NEXT,PREVIOUS} from './calendarbutton.js'
+import { NEXT, PREVIOUS } from './calendarbutton.js'
 import { html, css, LitElement } from 'lit-element';
 import { flexcolumn } from '../css/flexcolumn.js'
 import { padding } from '../css/padding.js'
 import { } from './currentmonth.js'
-import {}  from './daysofweek.js'
+import { } from './daysofweek.js'
+import { } from './daygrid.js'
+
 class CalendarBody extends LitElement {
     static get styles() {
         return [
@@ -35,6 +37,7 @@ class CalendarBody extends LitElement {
                 <bcn-calendarbutton .action="${NEXT}"></bcn-calendarbutton>
             </div>
             <bcn-daysofweek></bcn-daysofweek>
+            <bcn-daygrid></bcn-daygrid>
         `;
     }
 }
