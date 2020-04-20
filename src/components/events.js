@@ -32,11 +32,13 @@ class Events extends MixinPubSub(LitElement) {
     }
     constructor() {
         super();
-        this.objectDay = { date: new Date() };
+        this.objectDay = { date: new Date() }
+        this.refreshDay(this.objectDay);
     }
     async refreshDay(objectDay){
         this.objectDay = objectDay;
-        this.dayEvents = await EventService(this.objectDay.date);
+        this.dayEvents = null;
+        this.dayEvents = await EventService(objectDay.date);
     }
     render() {
         return html`
