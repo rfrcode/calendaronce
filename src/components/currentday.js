@@ -11,44 +11,38 @@ export class Day extends LitElement {
             box-sizing: border-box;
         
         }
+        
         :host([today]){
-            background-color:  rgb(0, 120, 215);
-            padding:0.125rem;
-    /*         color: white; */
-            font-weight: bolder;
-            outline: 0.125rem solid rgb(0, 120, 215);
+            background-color: var(--calendar-highlighted-color);
+            font-weight: var(--calendar-today-font-weight);
+            outline: 0.125rem solid var(--calendar-highlighted-color);
         }
     
         :host([selected]){
-            outline: 0.125rem solid rgb(0, 120, 215);
+            outline: 0.125rem solid var(--calendar-highlighted-color);
         }
     
         :host([today][selected]){
-            background-color: rgb(0, 120, 215);
-            border: 0.125rem solid black;
-            outline: 0.125rem solid rgb(0, 120, 215);
+            border: 0.125rem solid var(--calendar-internal-border-color);
         }
-    
-        :host([today][selected]:hover){
-            background-color: rgb(0, 120, 215);
-            border: 0.125rem solid black;
-            outline: 0.125rem solid rgb(102, 174, 231);
-        }
-    
-        :host([today]:not([selected]):hover){
-            background-color: rgb(0, 120, 215);
-            outline: 0.125rem solid rgb(102, 174, 231);
-        }
-    
-        :host(:not([selected]):not([today]):hover) {     
-            outline: 0.125rem solid grey;
+
+        :host(:hover) {     
+            outline: 0.125rem solid var(--calendar-greyed-color);
          }
     
+        :host([selected]:hover){
+            outline: 0.125rem solid var(--calendar-darker-highlighted-color);
+        }
+
+        :host([today]:hover){
+            outline: 0.125rem solid var(--calendar-secondary-color);
+        }
+    
         :host(:not([selected]):not([today])[notinmonth]) {    
-            color: grey;
+            color: var(--calendar-greyed-color);
         }
     `;
-      }
+    }
     static get properties() {
         return {
             dayOfTheMonth: { type: Number },

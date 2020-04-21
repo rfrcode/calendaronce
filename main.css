@@ -2,9 +2,13 @@
 :root{
     --calendar-color: white;
     --calendar-background:  black;
-    --calendar-secondary-color: blue;
+    --calendar-secondary-color: rgb(102, 174, 231);
+    --calendar-highlighted-color: rgb(0, 120, 215);
+    --calendar-darker-highlighted-color: rgb(8, 104, 180);
+    --calendar-internal-border-color: black;
     --calendar-greyed-color: grey;
     --calendar-font-family: Segoe UI, sans-serif;
+    --calendar-today-font-weight: bolder;
 }
 
 
