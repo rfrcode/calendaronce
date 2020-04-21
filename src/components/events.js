@@ -11,7 +11,9 @@ import { MixinPubSub, Disposables } from '../services/mixins.js';
 
 
 class Events extends MixinPubSub(Disposables(LitElement)) {
-    dayEvents = null;
+    static get properties(){
+        return {dayEvents:{type:Object}}
+    }
     static get styles() {
         return [
             flexcolumn,
@@ -32,6 +34,7 @@ class Events extends MixinPubSub(Disposables(LitElement)) {
     }
     async refreshDay(objectDay){
         this.objectDay = objectDay;
+        this.dayEvents = null;
         this.dayEvents = await EventService(objectDay.date);
     }
     render() {
@@ -39,7 +42,7 @@ class Events extends MixinPubSub(Disposables(LitElement)) {
             <div>${FormatDate.getDay(this.objectDay.date)}</div>
             ${!this.dayEvents?
                 html`<div>${CULTURE[CONFIG.culture].noEvents}</div>` :
-                html`${this.dayEvents.events.map(dayEvent => html`<event-item .item=${dayEvent}></event-item>)`)}`
+                html`${this.dayEvents.events.map(dayEvent => html`<event-item .item=${dayEvent}></event-item>`)}`
             }
         `;
     }
