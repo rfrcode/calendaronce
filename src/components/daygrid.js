@@ -8,7 +8,6 @@ import { LitElement, html, css } from '../../node_modules/lit-element/lit-elemen
 class DayGrid extends MixinPubSub(Disposables(LitElement)) {
     _date;
     _days = [];
-    _unsubscribers = [];
     _click;
     _selectedDay;
     _selectedDate;
@@ -25,14 +24,12 @@ class DayGrid extends MixinPubSub(Disposables(LitElement)) {
     }
     constructor() {
         super();
-        this._unsubscribers = [
-            pubsub.sub(CHANELS.CHANGEMONTH, this.changeAutomaticMonth.bind(this)),
-            pubsub.sub(CHANELS.CHANGEDAY, this.changeDay.bind(this)),
-        ];
+        pubsub.sub(CHANELS.CHANGEMONTH, this.changeAutomaticMonth, this, this.disposables);
+        pubsub.sub(CHANELS.CHANGEDAY, this.changeDay, this, this.disposables);
         this._click = this.click.bind(this);
         this.addEventListener('click', this._click);
     }
-    render(){
+    render() {
         return html`${this._days.map(day => html`${day}`)}`;
     }
     click(ev) {
@@ -138,10 +135,11 @@ class DayGrid extends MixinPubSub(Disposables(LitElement)) {
             );
         }
     }
-    get pubSub(){
+    get pubSub() {
         return super.pubSub;
     }
     disconnectedCallback() {
+        super.disconnectedCallback();
         this.dispose();
         this.removeEventListener('click', this._click);
         this._days = null;
