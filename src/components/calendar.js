@@ -18,7 +18,7 @@ class Calendar extends LitElement {
                     background-color: var(--calendar-background);
                     cursor: default;
                     user-select: none;
-                    width:20.625rem;
+                    width: 20.625rem;
                     font-family: var(--calendar-font-family);
                 }
             `
@@ -27,11 +27,10 @@ class Calendar extends LitElement {
     connectedCallback() {
         super.connectedCallback();
         this.addEventListener('getpub', (ev) => {
-            ev.stopPropagation();      
-            const {instance} = ev.detail || {};
-            instance && (instance.pubSub = this._pubsub)      
-            
-        },false)
+            ev.stopPropagation();
+            const { instance } = ev.detail || {};
+            instance && (instance.pubSub = this._pubsub)
+        }, false)
     }
     render() {
         return html`

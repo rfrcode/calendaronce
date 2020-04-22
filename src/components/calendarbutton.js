@@ -38,7 +38,7 @@ class CalendarButton extends MixinPubSub(LitElement) {
             this.pubSub.pub(CHANELS.CHANGEMANUALMONTH, this.action);
         }
     }
-    get clazz(){
+    get clazz() {
         return this.action === PREVIOUS ? CLASSPREVIOUS : CLASSNEXT;
     }
     render() {

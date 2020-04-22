@@ -7,7 +7,6 @@ import pubsub from '../services/pubsub.js'
 
 
 class CurrentMonth extends MixinPubSub(CurrentTextElement) {
-
     constructor() {
         super(CHANELS.CHANGEMONTH, FormatDate.getCurrentMonth, (date) => this.changeAutomaticMonth(date));
     }
@@ -24,6 +23,9 @@ class CurrentMonth extends MixinPubSub(CurrentTextElement) {
                 this.disposables
             );
         }
+    }
+    get pubSub() {
+        return super.pubSub;
     }
     changeManualMonth(dif) {
         this.date = DateService.getNextOrPreviosMonth(this.date, dif)

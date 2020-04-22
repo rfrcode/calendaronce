@@ -1,5 +1,5 @@
 export const MixinPubSub = Base => class extends Base {
-    constructor(){
+    constructor() {
         super(...arguments);
         this._pubsub = null;
     }
@@ -8,7 +8,7 @@ export const MixinPubSub = Base => class extends Base {
             let event = new CustomEvent('getpub', {
                 bubbles: true,
                 composed: true,
-                detail:{instance:instance}
+                detail: { instance: instance }
             })
             this.dispatchEvent(event);
         }
@@ -24,14 +24,14 @@ export const MixinPubSub = Base => class extends Base {
 }
 
 export const Disposables = Base => class extends Base {
-    constructor(){
+    constructor() {
         super(...arguments);
         this._disposables = [];
     }
-    get disposables(){
+    get disposables() {
         return this._disposables;
     }
-    dispose(){
-        this._disposables.forEach(d=>d());
+    dispose() {
+        this._disposables.forEach(d => d());
     }
 }

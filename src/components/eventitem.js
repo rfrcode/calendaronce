@@ -4,8 +4,8 @@ import { FormatDate } from '../services/formatdate.js'
 import { CULTURE } from '../services/culture.js'
 import { CONFIG } from '../services/config.js'
 class EventItem extends LitElement {
-    static get properties(){
-        return {item: { type: Object }}
+    static get properties() {
+        return { item: { type: Object } }
     }
     static get styles() {
         return css`
@@ -27,10 +27,9 @@ class EventItem extends LitElement {
             .end{
                 color: var(--calendar-greyed-color);
             }
-          
         `;
     }
-    renderText(text){
+    renderText(text) {
         return html`<div class="text">${text}</div>`
     }
     renderAllDay(text) {

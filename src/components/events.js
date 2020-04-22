@@ -9,10 +9,9 @@ import { flexcolumn } from '../css/flexcolumn.js'
 import { padding } from '../css/padding.js';
 import { MixinPubSub, Disposables } from '../services/mixins.js';
 
-
 class Events extends MixinPubSub(Disposables(LitElement)) {
-    static get properties(){
-        return {dayEvents:{type:Object}}
+    static get properties() {
+        return { dayEvents: { type: Object } }
     }
     static get styles() {
         return [
@@ -32,14 +31,14 @@ class Events extends MixinPubSub(Disposables(LitElement)) {
         this.objectDay = { date: new Date() }
         this.refreshDay(this.objectDay);
     }
-     async refreshDay(objectDay){
-        this.objectDay = objectDay;        
+    async refreshDay(objectDay) {
+        this.objectDay = objectDay;
         this.dayEvents = await EventService(objectDay.date);
     }
     render() {
         return html`
             <div>${FormatDate.getDay(this.objectDay.date)}</div>
-            ${!this.dayEvents?
+            ${!this.dayEvents ?
                 html`<div>${CULTURE[CONFIG.culture].noEvents}</div>` :
                 html`${this.dayEvents.events.map(dayEvent => html`<event-item .item=${dayEvent}></event-item>`)}`
             }

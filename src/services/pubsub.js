@@ -29,7 +29,7 @@ export class PubSub {
      */
     sub(chanel, cb, thisArgs = null, disposables = []) {
         if (thisArgs) {
-           cb=cb.bind(thisArgs);
+            cb = cb.bind(thisArgs);
         }
         let suscriptors = this._map.get(chanel);
         if (!suscriptors) {

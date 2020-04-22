@@ -9,6 +9,4 @@ function formatDate(date){
 
 export var EventService = async function (date){
     return EVENTDATA[formatDate(date)];
-
-
 }

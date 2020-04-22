@@ -9,7 +9,6 @@ export class Day extends LitElement {
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-        
         }
         
         :host([today]){
