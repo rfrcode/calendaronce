@@ -21,7 +21,7 @@ class Events extends MixinPubSub(Disposables(LitElement)) {
             css`
         :host{
             display:grid;
-            grid-template-rows:2.188 auto;
+            grid-template-rows:2.188rem auto;
             align-items: center;
         }`
         ]
@@ -32,9 +32,8 @@ class Events extends MixinPubSub(Disposables(LitElement)) {
         this.objectDay = { date: new Date() }
         this.refreshDay(this.objectDay);
     }
-    async refreshDay(objectDay){
-        this.objectDay = objectDay;
-        this.dayEvents = null;
+     async refreshDay(objectDay){
+        this.objectDay = objectDay;        
         this.dayEvents = await EventService(objectDay.date);
     }
     render() {

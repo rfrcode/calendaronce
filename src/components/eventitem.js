@@ -4,14 +4,14 @@ import { FormatDate } from '../services/formatdate.js'
 import { CULTURE } from '../services/culture.js'
 import { CONFIG } from '../services/config.js'
 class EventItem extends LitElement {
-    static getproperties(){
-        item: { type: Object }
+    static get properties(){
+        return {item: { type: Object }}
     }
     static get styles() {
         return css`
             :host{
                 display: grid;
-                grid: 1.5625rem 1.5625rem /20% auto;
+                grid: 1.5625rem 1.5625rem /30% auto;
                 column-gap: 0.75rem;
                 align-items: center;
                 text-align: center;

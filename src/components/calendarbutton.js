@@ -11,7 +11,7 @@ const CLASSNEXT = 'next';
 
 class CalendarButton extends MixinPubSub(LitElement) {
 
-    static getproperties() {
+    static get properties() {
         return {
             action: { type: Number }
         }
