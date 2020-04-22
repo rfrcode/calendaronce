@@ -3,10 +3,8 @@ import { CurrentTextElement } from './currenttextelement.js'
 import { CHANELS } from '../services/chanels.js';
 import { DateService } from '../services/dateservice.js'
 import { FormatDate } from '../services/formatdate.js';
-import pubsub from '../services/pubsub.js'
 
-
-class CurrentMonth extends MixinPubSub(CurrentTextElement) {
+class CurrentMonth extends MixinPubSub(Disposables(CurrentTextElement)) {
     constructor() {
         super(CHANELS.CHANGEMONTH, FormatDate.getCurrentMonth, (date) => this.changeAutomaticMonth(date));
     }
@@ -35,6 +33,5 @@ class CurrentMonth extends MixinPubSub(CurrentTextElement) {
             this.date = date;
         }
     }
-
 }
 customElements.define('bcn-currentmonth', CurrentMonth);
