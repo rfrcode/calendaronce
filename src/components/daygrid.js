@@ -6,12 +6,7 @@ import { MixinPubSub, Disposables } from '../services/mixins.js';
 import { LitElement, html, css } from '../../node_modules/lit-element/lit-element.js';
 
 class DayGrid extends MixinPubSub(Disposables(LitElement)) {
-    _date;
-    _days = [];
     _click;
-    _selectedDay;
-    _selectedDate;
-    _todayDay;
     static get styles() {
         return css`
         :host{
@@ -19,8 +14,14 @@ class DayGrid extends MixinPubSub(Disposables(LitElement)) {
             grid-template-columns: repeat(7,2.5rem);
             grid-template-rows: repeat(6, 2.5rem);
             gap: 0.375rem;
-        }    
+        }
     `
+    }
+    static get properties() {
+        return {
+            displayedMonth: { type: Object },
+            selectedDate: { type: Object }
+        }
     }
     constructor() {
         super();
@@ -28,102 +29,39 @@ class DayGrid extends MixinPubSub(Disposables(LitElement)) {
         pubsub.sub(CHANELS.CHANGEDAY, this.changeDay, this, this.disposables);
         this._click = this.click.bind(this);
         this.addEventListener('click', this._click);
+        this.displayedMonth = this.selectedDate = DateService.getCurrentDate();
     }
     render() {
-        return html`${this._days.map(day => html`${day}`)}`;
+        return html`${DateService.getMonthCalendar(this.displayedMonth).map(
+            objectDay => html`
+                <bcn-day .objectDay="${Object.assign(objectDay, { selectedDate: this.selectedDate })}"</bcn-day>`)}`;
     }
     click(ev) {
         ev.stopPropagation();
         let day = ev.composedPath().filter(d => d instanceof Day)[0]; //event delegation
         if (day) {
-            this.setSelectedDay(day);
+            this.setSelectedDate(day.date);
         }
     }
-    setSelectedDay(day) {
-        this.pubSub.pub(CHANELS.SELECTEDDAY, day.objectDay)
-        if (this._selectedDay) {
-            this._selectedDay.selected = false;
-        }
-        day.selected = true;
-        this._selectedDay = day;
-        this._selectedDate = new Date(day.objectDay.date.getTime());
+    //TODO refactor to getter?
+    setSelectedDate(date) {
+        this.pubSub.pub(CHANELS.SELECTEDDAY, { date })
+        this.selectedDate = date;
     }
     changeDay(date) {
-        if (this.isCurrentMonth()) {
-            //TODO Cambiar OldToday a false
-            //Cambiar newToday a true
-            //si _date == _selectedDay o !_selectedDay 
-            this._date = date;
-        }
-        this.refreshTodayDay(date)
+        this.requestUpdate();
     }
-
-    refreshTodayDay(date) {
-        this._todayDay.today = false;
-        let dateDay = this.getDayInGrid(date)
-        if (dateDay) {
-            dateDay.today = true;
-            this._todayDay = dateDay;
-        }
-    }
-
     changeAutomaticMonth(date) {
-        if (this.isCurrentMonth()) {
-            this.changeMonth(date)
+        if (DateService.isCurrentMonth(date, this.displayedMonth)) {
+            this.displayedMonth = date;
         }
-        else {
-            this.refreshTodayDay(date);
-        }
-    }
-    changeMonth(date) {
-        if (this._selectedDate) {
-            this._selectedDay.selected = false;
-        }
-        DateService.getMonthCalendar(date).forEach((objectDay, index) => {
-            this.updateDay(this._days[index], objectDay)
-        })
-        this._date = date;
     }
     changeManualMonth(dif) {
-        this.changeMonth(DateService.getNextOrPreviosMonth(this._date, dif))
-    }
-    createDays(date) {
-        this._days = DateService.getMonthCalendar(date)
-            .map(objectDay => {
-                let day = new Day();
-                this.updateDay(day, objectDay);
-                return day;
-            });
-    }
-    init(date) {
-        this._date = date;
-        this.createDays(date);
-        this._days.forEach(day => {
-            if (day.objectDay.isToday) {
-                this.setSelectedDay(day);
-            }
-        });
-    }
-    updateDay(day, objectDay) {
-        day.objectDay = objectDay;
-        if (this._selectedDate && DateService.isCurrentDate(objectDay.date, this._selectedDate)) {
-            day.selected = true;
-            this._selectedDay = day;
-        }
-        if (objectDay.isToday) {
-            this._todayDay = day;
-        }
-    }
-    isCurrentMonth() {
-        return this._days.map(d => d.objectDay).filter(o => o.isToday && o.isCurrentMonth)[0]
-    }
-    getDayInGrid(date) {
-        return this._days.filter(d => DateService.isCurrentDate(d.objectDay.date, date))[0]
+        this.displayedMonth = DateService.getNextOrPreviosMonth(this.displayedMonth, dif);
     }
     connectedCallback() {
         super.connectedCallback();
         this.getPub(this);
-        this.init(DateService.getCurrentDate());
     }
     set pubSub(value) {
         super.pubSub = value;
@@ -142,7 +80,7 @@ class DayGrid extends MixinPubSub(Disposables(LitElement)) {
         super.disconnectedCallback();
         this.dispose();
         this.removeEventListener('click', this._click);
-        this._days = null;
     }
 }
+
 customElements.define('bcn-daygrid', DayGrid)

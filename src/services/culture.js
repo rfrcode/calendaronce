@@ -21,7 +21,7 @@ export const CULTURE = {
         },
         daysOfWeek:["L","M","X","J","V","S","D"],
         firstDayOfWeek: MONDAY,
-        allDay:"Todo el dia",
+        allDay:"Todo el día",
         noEvents: "Sin eventos",
         previous: "Retroceder mes",
         next: "Avanzar mes",

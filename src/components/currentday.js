@@ -1,4 +1,5 @@
 import { LitElement, html, css } from '../../node_modules/lit-element/lit-element.js'
+import { DateService } from '../services/dateservice.js'
 
 export class Day extends LitElement {
     _objectDay;
@@ -44,23 +45,20 @@ export class Day extends LitElement {
     }
     static get properties() {
         return {
-            dayOfTheMonth: { type: Number },
+            date: { type: Object },
             selected: { type: Boolean, reflect: true },
             today: { type: Boolean, reflect: true },
             notInMonth: { type: Boolean, reflect: true },
         };
     }
     render() {
-        return html`${this.dayOfTheMonth}`;
+        return html`${this.date.getDate()}`;
     }
     set objectDay(value) {
-        this._objectDay = value;
-        this.dayOfTheMonth = value.date.getDate();
+        this.date = value.date;
         this.today = value.isToday;
         this.notInMonth = !value.isCurrentMonth;
-    }
-    get objectDay() {
-        return this._objectDay;
+        this.selected = DateService.isCurrentDate(value.selectedDate, this.date);
     }
 }
 
