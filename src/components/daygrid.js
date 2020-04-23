@@ -38,7 +38,7 @@ class DayGrid extends MixinPubSub(Disposables(LitElement)) {
         return html`${days).map(
             objectDay => {html`
                 const objectDay = Object.assign(objectDay, { selectedDate: this.selectedDate });
-                return <bcn-day .objectDay="${objectDay}"</bcn-day>`
+                return <bcn-day .objectDay="${objectDay}"></bcn-day>`
             }
     }
     click(ev) {
