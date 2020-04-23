@@ -35,11 +35,12 @@ class DayGrid extends MixinPubSub(Disposables(LitElement)) {
     }
     render() {
         const days=DateService.getMonthCalendar(this.displayedMonth);
-        return html`${days).map(
-            objectDay => {html`
-                const objectDay = Object.assign(objectDay, { selectedDate: this.selectedDate });
-                return <bcn-day .objectDay="${objectDay}"></bcn-day>`
-            }
+        return html`${days.map(
+            objectDay => {
+                objectDay = Object.assign(objectDay, { selectedDate: this.selectedDate });
+                return html`<bcn-day .objectDay="${objectDay}"></bcn-day>`;
+            })
+        }`
     }
     click(ev) {
         ev.stopPropagation();
@@ -48,15 +49,10 @@ class DayGrid extends MixinPubSub(Disposables(LitElement)) {
             this.setSelectedDate(day.date);
         }
     }
-    //TODO refactor to getter?
     setSelectedDate(date) {
         this.pubSub.pub(CHANELS.SELECTEDDAY, { date })
         this.selectedDate = date;
     }
-    //REVISAR  10-11
-    //changeDay(date) {
-    //    this.requestUpdate();
-    //}
     changeAutomaticMonth(date) {
         if (DateService.isCurrentMonth(date, this.displayedMonth)) {
             this.displayedMonth = date;
