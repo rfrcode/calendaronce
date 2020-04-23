@@ -6,7 +6,6 @@ import { MixinPubSub, Disposables } from '../services/mixins.js';
 import { LitElement, html, css } from '../../node_modules/lit-element/lit-element.js';
 
 class DayGrid extends MixinPubSub(Disposables(LitElement)) {
-    _click;
     static get styles() {
         return css`
         :host{
@@ -25,20 +24,26 @@ class DayGrid extends MixinPubSub(Disposables(LitElement)) {
     }
     constructor() {
         super();
-        pubsub.sub(CHANELS.CHANGEMONTH, this.changeAutomaticMonth, this, this.disposables);
-        pubsub.sub(CHANELS.CHANGEDAY, this.changeDay, this, this.disposables);
-        this._click = this.click.bind(this);
-        this.addEventListener('click', this._click);
+        
         this.displayedMonth = this.selectedDate = DateService.getCurrentDate();
+        this._click = this.click.bind(this);
+        
+        pubsub.sub(CHANELS.CHANGEMONTH, this.changeAutomaticMonth, this, this.disposables);
+        pubsub.sub(CHANELS.CHANGEDAY, ()=>this.requestUpdate(), null, this.disposables);        
+        this.addEventListener('click', this._click);
+        
     }
     render() {
-        return html`${DateService.getMonthCalendar(this.displayedMonth).map(
-            objectDay => html`
-                <bcn-day .objectDay="${Object.assign(objectDay, { selectedDate: this.selectedDate })}"</bcn-day>`)}`;
+        const days=DateService.getMonthCalendar(this.displayedMonth);
+        return html`${days).map(
+            objectDay => {html`
+                const objectDay = Object.assign(objectDay, { selectedDate: this.selectedDate });
+                return <bcn-day .objectDay="${objectDay}"</bcn-day>`
+            }
     }
     click(ev) {
         ev.stopPropagation();
-        let day = ev.composedPath().filter(d => d instanceof Day)[0]; //event delegation
+        let day = ev.composedPath().find(d => d instanceof Day); //event delegation
         if (day) {
             this.setSelectedDate(day.date);
         }
@@ -48,9 +53,10 @@ class DayGrid extends MixinPubSub(Disposables(LitElement)) {
         this.pubSub.pub(CHANELS.SELECTEDDAY, { date })
         this.selectedDate = date;
     }
-    changeDay(date) {
-        this.requestUpdate();
-    }
+    //REVISAR  10-11
+    //changeDay(date) {
+    //    this.requestUpdate();
+    //}
     changeAutomaticMonth(date) {
         if (DateService.isCurrentMonth(date, this.displayedMonth)) {
             this.displayedMonth = date;
